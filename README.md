@@ -7,7 +7,7 @@ A tiny script to run async functions aka promises one after the other
 Import package:
 
 ```
-import { runSequence } from "@klw/node-sequential-promise";
+import { runSequence } from "@klw/node-sequential-promises";
 ```
 
 Your async functions must follow a few rules:
