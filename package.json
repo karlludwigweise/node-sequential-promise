@@ -1,5 +1,5 @@
 {
-  "name": "node-sequential-promise",
+  "name": "@klw/node-sequential-promise",
   "description": "A tiny script to run async functions aka promises one after the other",
   "version": "0.0.1",
   "author": {
