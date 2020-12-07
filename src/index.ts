@@ -9,7 +9,7 @@ export const runSequence = async (
     return Promise.resolve({ success: true, started: [], fulfilled: [] });
   }
 
-  let error;
+  let errorMessage;
   const started: number[] = [];
   const fulfilled: number[] = [];
   const success = await steps.reduce(async (promise: Promise<any>, step, i) => {
@@ -25,10 +25,10 @@ export const runSequence = async (
         return step();
       } else {
         // Stop alltogether, if one went wrong
-        return Promise.resolve(false);
+        return Promise.reject(false);
       }
     } catch (e) {
-      error = e;
+      errorMessage = e;
       return Promise.resolve(false);
     }
   }, Promise.resolve(true));
@@ -38,5 +38,9 @@ export const runSequence = async (
     fulfilled.push(steps.length - 1);
   }
 
-  return Promise.resolve({ success, started, fulfilled, error });
+  let result = { success, started, fulfilled, errorMessage };
+  if (errorMessage) {
+    result = { ...result, errorMessage };
+  }
+  return Promise.resolve(result);
 };
