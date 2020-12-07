@@ -45,7 +45,6 @@ A positive result:
   success: true,
   started: [0, 1, 2],
   fulfilled: [0, 1, 2],
-  errorMessage: undefined,
 }
 ```
 
