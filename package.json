@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc",
     "prepare" : "yarn build",
+    "prepublishOnly": "yarn test",
     "test": "jest --config jestconfig.json",
     "test:watch": "yarn test -- --watch"
   },
