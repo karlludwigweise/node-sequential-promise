@@ -1,4 +1,4 @@
-# node-sequential-promise
+# node-sequential-promises
 
 A tiny script to run async functions aka promises one after the other
 
