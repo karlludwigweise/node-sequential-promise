@@ -2,9 +2,7 @@ import { RunSequenceResult, RunSequenceStep } from "./types";
 
 export const Greeter = (name: string) => `Hello ${name}`;
 
-export const runSequence = async (
-  steps: RunSequenceStep[]
-): Promise<RunSequenceResult> => {
+export const runSequence = async (steps: RunSequenceStep[]): Promise<RunSequenceResult> => {
   if (steps.length === 0) {
     return Promise.resolve({ success: true, started: [], fulfilled: [] });
   }

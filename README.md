@@ -12,7 +12,7 @@ import { runSequence } from "@klw/node-sequential-promises";
 
 Your async functions must follow a few rules:
 
-* If it's successful, if must return `true`
+* If it's successful, it must return `true`
 * If it fails, it must 
   * `Promise.reject("Your Error Message Here")` or 
   * return `false` (*soft fail* without an error message)
