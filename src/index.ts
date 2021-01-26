@@ -1,5 +1,23 @@
 import { RunSequenceResult, RunSequenceStep } from "./types";
 
+/**
+ * Runs Promises one after the other. Will stop and report, when a Promise fails.
+ * @param steps - Arry of functions, that return a Promise
+ *
+ * @link https://github.com/karlludwigweise/node-sequential-promises
+ * @example
+ * ```typescript
+ * const success = () => Promise.resolve();
+ * const result = await runSequence([success, success]);
+ *
+ * // Returns
+ * {
+ *  success: true,
+ *  started: [0, 1],
+ *  fulfilled: [0, 1],
+ * }
+ * ```
+ */
 export const runSequence = async (steps: RunSequenceStep[]): Promise<RunSequenceResult> => {
   if (steps.length === 0) {
     return Promise.resolve({ success: true, started: [], fulfilled: [] });
