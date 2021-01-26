@@ -12,10 +12,10 @@ import { runSequence } from "@klw/node-sequential-promises";
 
 Your async functions must follow a few rules:
 
-* If it's successful, it must return `true`
-* If it fails, it must 
-  * `Promise.reject("Your Error Message Here")` or 
-  * return `false` (*soft fail* without an error message)
+- If it's successful, it must return `true`
+- If it fails, it must
+  - `Promise.reject("Your Error Message Here")` or
+  - return `false` (_soft fail_ without an error message)
 
 ```
 const myAsyncFunc1 = async () => {
@@ -33,13 +33,15 @@ Run your async functions on the order you like:
 const result = await runSequence([myAsyncFunc1, myAsyncFunc2, myAsyncFunc3]);
 ```
 
-`node-sequential-promise` will run them one after the other.
-* If one should fail, it will stop running all others.
-* Even if it fails, you will get a resolved result.
+`node-sequential-promises` will run them one after the other.
+
+- If one should fail, it will stop running all others.
+- Even if it fails, you will get a resolved result.
 
 ## Return value
 
 A positive result:
+
 ```
 {
   success: true,
@@ -49,6 +51,7 @@ A positive result:
 ```
 
 A negative result (2nd async function failed):
+
 ```
 {
   success: false,
@@ -58,7 +61,8 @@ A negative result (2nd async function failed):
 }
 ```
 
-A negative result (2nd async function failed) with a *soft fail*:
+A negative result (2nd async function failed) with a _soft fail_:
+
 ```
 {
   success: false,
