@@ -12,14 +12,8 @@ on:
     types: [created]
 
 jobs:
-  one:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - run: echo "one"
   two:
     runs-on: ubuntu-latest
-    needs: one
     if: github.event.action == 'closed'
     steps:
       - run: echo "two"
