@@ -1,8 +1,10 @@
-export type RunSequenceStep = () => Promise<boolean>;
+export type RunSequenceStep = () => Promise<void | RunSequenceError>;
 
 export interface RunSequenceResult {
   success: boolean;
   started: number[];
   fulfilled: number[];
-  error?: string | Error;
+  error?: RunSequenceError;
 }
+
+export type RunSequenceError = string | Error;

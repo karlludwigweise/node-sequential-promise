@@ -12,15 +12,16 @@ import { runSequence } from "@klw/node-sequential-promises";
 
 Your async functions must follow a few rules:
 
-- If it's successful, it must return `true`
+- If it's successful, it must `return Promise.resolve()`
 - If it fails, it must
-  - `Promise.reject("Your Error Message Here")` or
-  - return `false` (_soft fail_ without an error message)
+  - `return Promise.reject()` or
+  - `return Promise.reject("Your Error Message Here")` or
+  - `return Promise.reject(new Error("Your Error Message Here"))`
 
 ```
 const myAsyncFunc1 = async () => {
     if (1 + 1 = 2) {
-        return Promise.resolve(true);
+        return Promise.resolve();
     } else {
         return Promise.reject("Your Error Message Here");
     }
@@ -58,16 +59,5 @@ A negative result (2nd async function failed):
   started: [0, 1],
   fulfilled: [0],
   errorMessage: "Your Error Message Here",
-}
-```
-
-A negative result (2nd async function failed) with a _soft fail_:
-
-```
-{
-  success: false,
-  started: [0, 1],
-  fulfilled: [0],
-  errorMessage: false,
 }
 ```

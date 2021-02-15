@@ -1,9 +1,10 @@
 import { runSequence } from "../index";
 import { RunSequenceStep } from "../types";
 
-const success: RunSequenceStep = () => Promise.resolve(true);
-const failureSoft: RunSequenceStep = () => Promise.reject(false);
-const failureHard: RunSequenceStep = () => Promise.reject("Something went wrong!");
+const success: RunSequenceStep = () => Promise.resolve();
+const failure: RunSequenceStep = () => Promise.reject();
+const failureWithString: RunSequenceStep = () => Promise.reject("Something went wrong!");
+const failureWithError: RunSequenceStep = () => Promise.reject(new Error("Something went wrong!"));
 
 test("should run through all successful promises", async () => {
   const expected = {
@@ -15,24 +16,34 @@ test("should run through all successful promises", async () => {
   expect(received).toEqual(expected);
 });
 
-test("should stop with an error message, when rejected", async () => {
+test("should stop, when rejected", async () => {
+  const expected = {
+    success: false,
+    started: [0, 1],
+    fulfilled: [0],
+  };
+  const received = await runSequence([success, failure, success]);
+  expect(received).toEqual(expected);
+});
+
+test("should stop with an errorMessage, when rejected with string", async () => {
   const expected = {
     success: false,
     started: [0, 1],
     fulfilled: [0],
     errorMessage: "Something went wrong!",
   };
-  const received = await runSequence([success, failureHard, success]);
+  const received = await runSequence([success, failureWithString, success]);
   expect(received).toEqual(expected);
 });
 
-test("should stop without an error message, when false", async () => {
+test("should stop with an errorMessage, when rejected with Error", async () => {
   const expected = {
     success: false,
     started: [0, 1],
     fulfilled: [0],
-    errorMessage: false,
+    errorMessage: Error("Something went wrong!"),
   };
-  const received = await runSequence([success, failureSoft, success]);
+  const received = await runSequence([success, failureWithError, success]);
   expect(received).toEqual(expected);
 });
