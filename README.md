@@ -39,7 +39,7 @@ const result = await runSequence([myAsyncFunc1, myAsyncFunc2, myAsyncFunc3]);
 - If one should fail, it will stop running all others.
 - Even if it fails, you will get a resolved result.
 
-## Return values
+## Return value
 
 A positive result:
 
