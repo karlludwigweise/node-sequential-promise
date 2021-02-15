@@ -12,9 +12,9 @@ on:
     types: [created]
 
 jobs:
-  version_minor:
+  version:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == 'true'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -22,16 +22,6 @@ jobs:
           node-version: 14
       - run: yarn
       - run: yarn version --minor
-  version_patch:
-    runs-on: ubuntu-latest
-    if: github.event.push == 'true'
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - run: yarn
-      - run: yarn version --patch
   build:
     runs-on: ubuntu-latest
     steps:
