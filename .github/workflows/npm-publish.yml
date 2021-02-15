@@ -4,11 +4,24 @@
 name: Deploy to NPM
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
   release:
     types: [created]
 
 jobs:
+  version_minor:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == 'true'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: yarn
+      - run: yarn version --minor
   build:
     runs-on: ubuntu-latest
     steps:
