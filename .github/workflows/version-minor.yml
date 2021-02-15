@@ -23,3 +23,4 @@ jobs:
       - run: git config --global user.name "GitHub Action"
       - run: yarn
       - run: yarn version --minor
+      - run: git status
