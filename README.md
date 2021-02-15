@@ -41,7 +41,7 @@ const result = await runSequence([myAsyncFunc1, myAsyncFunc2, myAsyncFunc3]);
 
 ## Return value
 
-A positive result:
+A positive results:
 
 ```
 {
