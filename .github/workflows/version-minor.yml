@@ -29,6 +29,9 @@ jobs:
     needs: version
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - run: git checkout HEAD^
       - uses: actions/setup-node@v1
         with:
           node-version: 14
